@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: ai-ml-api
+    env: python
+    rootDir: ai_service
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --timeout 600 --preload"
+    runtime: python3.10
