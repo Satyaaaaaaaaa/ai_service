@@ -1,0 +1,7 @@
+Flask
+numpy
+pillow
+joblib
+tensorflow-cpu==2.11.0
+tensorflow-hub
+protobuf<4
