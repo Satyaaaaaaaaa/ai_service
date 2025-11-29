@@ -6,3 +6,4 @@ tensorflow-cpu==2.10.0
 tensorflow-hub
 protobuf<4
 gunicorn
+scikit-learn==1.2.2
