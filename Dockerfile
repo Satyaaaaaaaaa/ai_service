@@ -20,8 +20,9 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose server port
-EXPOSE 5001
+EXPOSE 5000
 
 # Start Flask app via Gunicorn
 CMD ["bash", "-c", "gunicorn app:app --timeout 600 --preload -b 0.0.0.0:$PORT"]
+
 
