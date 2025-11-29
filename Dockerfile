@@ -23,4 +23,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5001
 
 # Start Flask app via Gunicorn
-CMD ["gunicorn", "app:app", "--timeout", "600", "--preload", "-b", "0.0.0.0:5001"]
+CMD ["bash", "-c", "gunicorn app:app --timeout 600 --preload -b 0.0.0.0:$PORT"]
+
