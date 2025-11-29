@@ -1,9 +1,11 @@
-Flask
+Flask==3.1.2
+pillow==10.4.0
+joblib==1.3.2
+
 numpy==1.24.3
-pillow
-joblib
+
 tensorflow-cpu==2.10.0
-tensorflow-hub
-protobuf<4
-gunicorn
 scikit-learn==1.2.2
+xgboost==1.7.6
+
+gunicorn==21.2.0
