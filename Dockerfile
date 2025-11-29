@@ -1,28 +1,32 @@
-# Force Python 3.10
 FROM python:3.10-slim
 
-# Set working directory
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /app
 
-# Copy everything into container
-COPY . .
+# Copy only requirements first (caching)
+COPY requirements.txt .
 
-# System dependencies for TensorFlow CPU
-RUN apt-get update && apt-get install -y \
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    wget
+    wget \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Expose server port
-EXPOSE 5000
+# Copy your entire project
+COPY . .
 
-# Start Flask app via Gunicorn
-CMD ["bash", "-c", "gunicorn app:app --timeout 600 --preload -b 0.0.0.0:$PORT"]
+# Expose port (Railway will map automatically)
+EXPOSE 8000
 
-
+# Start your ML API using Gunicorn
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000", "--timeout", "600", "--workers", "1"]
