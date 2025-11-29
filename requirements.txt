@@ -1,5 +1,5 @@
 Flask
-numpy
+numpy==1.24.3
 pillow
 joblib
 tensorflow-cpu==2.10.0
