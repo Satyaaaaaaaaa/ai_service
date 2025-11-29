@@ -8,6 +8,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input as resnet_pr
 from tensorflow.keras.applications.densenet import preprocess_input as densenet_preprocess
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input as mobilenet_preprocess
 from tensorflow.keras.preprocessing.image import img_to_array
+import os
 
 app = Flask(__name__)
 
@@ -55,5 +56,7 @@ def predict():
         "probabilities": {cls: float(probs[i]) for i, cls in enumerate(label_encoder.classes_)}
     })
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
